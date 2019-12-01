@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth, signInWithGoogle } from '../firebase/firebase.utils';
-import { createUserProfile } from '../firebase/actions';
+import { createUserProfile,getArticles } from '../firebase/actions';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       const { user } = await auth.signInWithEmailAndPassword(email, password);
-
+      getArticles()
       await createUserProfile(user);
     } catch (error) {
       console.log('there was an error');
